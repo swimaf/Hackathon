@@ -1,0 +1,11 @@
+{
+    "folder": "../youtube-downloads/",
+    
+    "format": "flv",
+    
+    "quality": "18",
+
+    "videos": [
+      "https://www.youtube.com/watch?v=uiqJc6yz6tg"
+    ]
+}

@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+</head>
+<body>
+
+    <form action="/download" method="post" name="nodetube" onsubmit="return (!!(document.forms[0].video.value));">
+      <div class="input-append">
+        <input placeholder="Enter youtube video URL" name="video" class="span4" onfocus="if(this.value) document.forms[0].reset();" id="video" type="text" value="https://www.youtube.com/watch?v=2Vv-BfVoq4g">
+        <button class="btn" type="submit">Go!</button>
+      </div>
+    </form>
+
+</body>
+</html>

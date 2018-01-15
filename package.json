@@ -1,0 +1,25 @@
+{
+  "name": "nodetube",
+  "version": "0.1.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js",
+    "deploy": "git push heroku master",
+    "test": "mocha test"
+  },
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "connect": "^3.5.1",
+    "serve-static": "^1.11.1",
+    "ytdl-core": "^0.14.2",
+    "progress": "^1.1.7"
+  },
+  "engines": {
+    "node": "0.14.x",
+    "npm": "2.14.x"
+  },
+  "devDependencies": {
+    "mocha": "^3.1.2",
+    "should": "^11.1.2"
+  }
+}
