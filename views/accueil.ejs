@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ＨＡＣＫＡＴＨＯＮ ＣＯＮＶＥＲＴＥＲ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
+    <style>
+        .margin-auto {
+            margin: auto;
+        }
+
+        .height-100 {
+            min-height: 67vh !important;
+        }
+        .font-medium {
+            font-size: 12px;
+        }
+        .progress-dowload {
+            position: absolute;
+            bottom: -1rem;
+            border-radius: 0;
+        }
+        .checkbox {
+            margin-right:1em;
+        }
+        .logo {
+            position: absolute;
+            right: 10px;
+            height: 50px;
+            font-style: italic;
+        }
+        .logo img {
+            height: 50px;
+            margin-left: 10px;
+
+        }
+    </style>
+  </head>
+  <body>
+  <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <strong>ＨＡＣＫＡＴＨＯＮ ＣＯＮＶＥＲＴＥＲ</strong>
+      </a>
+      <div class="logo is-inline-flex is-hidden"><p class="margin-auto">Téléchargement... </p><img  src="./img/loading.gif" /></div>
+    </div>
+    <progress class="progress progress-dowload is-primary" value="15" max="100">30%</progress>
+
+  </nav>
+
+
+  <div class="columns height-100">
+    <div class="column is-one-fifth"></div>
+    <div class="column is-desktop is-vcentered margin-auto">
+      <br>
+      <div class="field is-flex " >
+        <input class="input" type="text" placeholder="Chercher une musique ..." id="searchbar">
+        <button class="button is-dark" id="searchbtn"><i class="fa fa-search" aria-hidden="true"></i>
+</button>
+      </div>
+      <div class="field">
+        <label class="checkbox">
+          <input type="checkbox" id="YoutubeSelect" checked>
+          Youtube
+        </label>
+        <label class="checkbox" >
+          <input type="checkbox" id="SoundCloudSelect" checked>
+          SoundCloud
+        </label>
+        <label class="checkbox">
+          <input type="checkbox" id="VimeoSelect" checked>
+          Vimeo
+        </label>
+      </div>
+      <div class="field">
+        <p class="control" id="searchresults">
+        </p>
+      </div>
+    </div>
+    <div class="column is-one-fifth"></div>
+  </div>
+
+  <footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered font-medium">
+      <p>
+        <strong>DOMContentLoaded</strong> avec <a href="">Dominci Antoine</a>, <a href="">Jean-Pierre Jouault</a>, <a href="">Etienne Martinet</a>. <br/>
+         Licence  <a href="https://www.gnu.org/licenses/licenses.fr.html">GNU General Public Licence</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+  <script>
+  document.addEventListener('DOMContentLoaded', function () {
+
+  // Get all "navbar-burger" elements
+  var $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+  // Check if there are any navbar burgers
+  if ($navbarBurgers.length > 0) {
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(function ($el) {
+      $el.addEventListener('click', function () {
+
+        // Get the target from the "data-target" attribute
+        var target = $el.dataset.target;
+        var $target = document.getElementById(target);
+
+        // Toggle the class on both the "navbar-burger" and the "navbar-menu"
+        $el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+  }
+
+});
+  </script>
+  <script>
+    let countResult = 0;
+
+    function snippetGenerator(title, description, thumbnail, videoId) {
+      let a = document.createElement('article')
+      thumbnail = thumbnail == null ? "https://i.pinimg.com/736x/e9/2d/c2/e92dc294bbc9b7cb096c1ee9b40a71fe.jpg" : thumbnail;
+      description = description == null ? "Pas de description" : description;
+      a.setAttribute('class', 'media')
+      a.innerHTML = '<figure class="media-left">'+
+          '<p class="image is-64x64">'+
+            '<img src="'+thumbnail+'">'+
+          '</p>'+
+        '</figure>'+
+        '<div class="media-content">'+
+          '<div class="content">'+
+            '<p>'+
+              '<strong><a target="_blank" href="https://www.youtube.com/watch?v='+videoId+'">'+title+'</a></strong>'+
+              '<br>'+
+              description+
+              '<br><button class="button is-light"><a class="download"  href="/download?platform=youtube&v='+videoId+'&name='+title+'"><i class="fa fa-download" aria-hidden="true"></i></a></button> <button class="button is-light"><a href="http://youtube.com"><img src="https://m.youtube.com/yts/mobile/img/apple-touch-icon-144x144-precomposed-vflopw1IA.png" alt="ytb icon" style="width:22px;"></a></button>'+
+            '</p>'+
+          '</div>'+
+        '</div>'
+      return a
+    }
+
+    function soundcloud_snippetGenerator(title, description, artwork, trackId, url) {
+      let a = document.createElement('article')
+      artwork = artwork == null ?  "https://i.pinimg.com/736x/e9/2d/c2/e92dc294bbc9b7cb096c1ee9b40a71fe.jpg" : artwork;
+      description = description == null ? "Pas de description" : description;
+      a.setAttribute('class', 'media')
+      a.innerHTML = '<figure class="media-left">'+
+          '<p class="image is-64x64">'+
+            '<img src="'+artwork+'">'+
+          '</p>'+
+        '</figure>'+
+        '<div class="media-content">'+
+          '<div class="content">'+
+            '<p>'+
+              '<strong><a target="_blank" href="'+url+'">'+title+'</a></strong>'+
+              '<br>'+
+              description+
+              '<br><button class="button is-light"><a class="download" href="/download?platform=soundcloud&tid='+trackId+'&name='+title+'"><i class="fa fa-download" aria-hidden="true"></i></a></button> <button class="button is-light"><a href="http://soundcloud.com"><img src="https://www.bangkokdjs.com/wp-content/uploads/2013/12/soundcloud-icon.png" alt="scloud icon" style="width:22px;"></a></button>'+
+            '</p>'+
+          '</div>'+
+        '</div>'
+      return a
+    }
+
+    function vimeo_snippetGenerator(title, description, link, img) {
+      let a = document.createElement('article')
+      img = img == null ? "https://i.pinimg.com/736x/e9/2d/c2/e92dc294bbc9b7cb096c1ee9b40a71fe.jpg" : img;
+      description = description == null ? "Pas de description" : description;
+      a.setAttribute('class', 'media')
+      a.innerHTML = '<figure class="media-left">'+
+          '<p class="image is-64x64">'+
+            '<img src="'+img+'">'+
+          '</p>'+
+        '</figure>'+
+        '<div class="media-content">'+
+          '<div class="content">'+
+            '<p>'+
+              '<strong><a target="_blank" href="https://vimeo.com/'+link.replace("/videos", "")+'">'+title+'</a></strong>'+
+              '<br>'+
+              description+
+              '<br><button class="button is-light"><a class="download" href="/download?platform=vimeo&link='+link+'&name='+title+'"><i class="fa fa-download" aria-hidden="true"></i></a></button> <button class="button is-light"><a href="http://vimeo.com"><img src="https://i.vimeocdn.com/favicon/main-touch_180" alt="vimeo icon" style="width:22px;"></a></button>'+
+            '</p>'+
+          '</div>'+
+        '</div>'
+      return a
+    }
+      
+     
+    let finished = () => {
+        countResult++;
+        if(countResult >= nbElements()) {
+            Array.from(document.querySelectorAll(".download")).forEach(function(e) {
+                e.addEventListener('click', function() {
+                    document.getElementsByClassName("logo")[0].classList.remove("is-hidden");
+                });
+            });
+            if (searchresults.innerHTML == "" ) {
+                searchresults.innerHTML = "<p>Oops, aucun résultat trouvé </p>";
+            }
+        }
+    }
+
+    let nbElements = () => {
+        return Array.from(document.querySelectorAll("[type='checkbox']")).filter(function(e) {
+            return e.checked;
+        }).length;
+    }
+
+    let clearSearchResults = (callback) => {
+      let parent = searchresults.parentElement
+      parent.removeChild(searchresults)
+      //<p class="control" id="searchresults">
+      //</p>
+      let p = document.createElement('p')
+      p.setAttribute('class', 'control')
+      p.setAttribute('id', 'searchresults')
+      parent.appendChild(p)
+    }
+
+    let search = (e) => {
+      clearSearchResults()
+      countResult = 0;
+      if ( document.getElementById("YoutubeSelect").checked)
+      {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+             // Typical action to be performed when the document is ready:
+             //document.getElementById("demo").innerHTML = xhttp.responseText;
+             let res = JSON.parse(xhttp.responseText)
+             for (let item of res.items) {
+               //console.log(item) //item.snippet.title item.snippet.description
+               searchresults.appendChild(snippetGenerator(item.snippet.title, item.snippet.description, item.snippet.thumbnails.default.url, item.id.videoId))
+             }
+             finished();
+          }
+          };
+          xhttp.open("GET", "https://www.googleapis.com/youtube/v3/search?part=snippet&q="+searchbar.value+"&maxResults=10&order=viewCount&type=video&key=AIzaSyCjZGeChuo4Upx4akHpYwUaF15ZpnGCrT0", true);
+          xhttp.send();
+      }
+
+      if ( document.getElementById("SoundCloudSelect").checked)
+      {
+          var xhttpscloud = new XMLHttpRequest();
+          xhttpscloud.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+             // Typical action to be performed when the document is ready:
+             //document.getElementById("demo").innerHTML = xhttp.responseText;
+             let tracks = JSON.parse(xhttpscloud.responseText)
+             for (let track of tracks) {
+               searchresults.appendChild(soundcloud_snippetGenerator(track.title, track.description, track.artwork_url, track.id, track.permalink_url))
+             }
+             finished();
+          }
+          };
+          xhttpscloud.open("GET", "http://127.0.0.1:3000/sc_search?q="+searchbar.value, true);
+          xhttpscloud.send();
+      }
+
+      if ( document.getElementById("VimeoSelect").checked)
+      {
+          var xhttpvim = new XMLHttpRequest();
+          xhttpvim.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+             let r = JSON.parse(xhttpvim.responseText)
+             for (let results of r.data) {
+               searchresults.appendChild(vimeo_snippetGenerator(results.name, results.description, results.uri, results.pictures.sizes[0].link))
+             }
+             finished();
+          }
+          };
+          xhttpvim.open("GET", "http://127.0.0.1:3000/vim_search?q="+searchbar.value, true);
+          xhttpvim.send();
+      }
+      if(nbElements() == 0) {
+        finished();
+      }
+    }
+    searchbar.addEventListener('keypress', (e) => {
+      if (e.keyCode == 13) search(undefined)
+    })
+    searchbtn.addEventListener('click', search)
+      
+    document.querySelectorAll("[type='checkbox']").forEach(function(e) {
+        e.addEventListener('click', search)
+    });
+
+    </script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.4/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.on('download_done', function(msg){
+            console.log("etienne")
+            document.getElementsByClassName("logo")[0].classList.add("is-hidden");
+        });
+    </script>
+  </body>
+</html>
