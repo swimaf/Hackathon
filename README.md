@@ -1,1 +1,7 @@
-projet qwant du hackathon 2018
+Projet Qwant du Hackathon 2018
+
+Membre
+- Antoine Dominici
+- Etienne Martinet
+- Jean-Pierre Jouault
+
