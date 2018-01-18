@@ -1,4 +1,4 @@
-#Projet Qwant du Hackathon 2018
+# Projet Qwant du Hackathon 2018
 
 Membre
 - Antoine Dominici
