@@ -1,6 +1,6 @@
 # Projet Qwant du Hackathon 2018
 
---- INSTALLATION ---
+## INSTALLATION
 
 Prérequis: Nodejs LTS v.8.9.x
 
@@ -11,12 +11,12 @@ Prérequis: Nodejs LTS v.8.9.x
 5) Taper en ligne de commande npm install -g ytdl
 6) Créer les sous-dossiers : scloud-dls, dls et vim-dls dans le dossier du projet
 
---- UTILISATION ---
+## UTILISATION
 
 Taper dans le dossier du projet : node serveur.js avec les droits d'admin de préférence
 Ouvrir le navigateur à l'adresse : 127.0.0.1:3000
 
---- DESCRIPTION DES FICHIERS IMPORTANTS ---
+## DESCRIPTION DES FICHIERS IMPORTANTS
 
  - serveur.js : fichier de serveur ExpressJS qui gère le rendu de la page de l'application, les recherches sur les différentes plateformes de contenu multimédia,
    ainsi que l'enregistrement, la conversion, et le transfert des fichiers demandés
@@ -27,7 +27,7 @@ Ouvrir le navigateur à l'adresse : 127.0.0.1:3000
 
  - views/accueil.ejs : page de vue ejs (moteur de rendu utilisé) basée sur le framework CSS Bulma  permettant de définir l'interface de l'application
 
- --- LICENCE ---
+ ## LICENCE
 
  Les différents modules externes utilisés ont été récupérés via le gestionnaire de paquets NPM. Les modules de cette plateforme sont sous licences libres de type : GNU GPL ou MIT
 
